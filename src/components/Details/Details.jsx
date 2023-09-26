@@ -7,7 +7,7 @@ import {
 import "./Details.css";
 import { useState, useEffect } from "react";
 
-const Details = () => {
+const Details = ({ currentThread }) => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Details = () => {
         </div>
       </header>
 
-      <div id="thread-details">
+      <div id="thread-details" style={{ paddingTop: "1rem" }}>
         <div className="details-box" style={{ alignItems: "center" }}>
           <img
             style={{
@@ -65,11 +65,14 @@ const Details = () => {
               borderRadius: "50%",
               marginBottom: "1rem",
             }}
-            src="https://via.placeholder.com/50"
+            src={currentThread.userProfileImg}
           />
 
           <div style={{ textAlign: "center" }}>
-            <p style={{ marginBottom: "0.5rem" }}>username@mail.com</p>
+            <p style={{ marginBottom: "0.5rem" }}>
+              {currentThread.username.toLowerCase().replace(/\s/g, "") +
+                "@mail.com"}
+            </p>
             <p
               style={{
                 marginBottom: "0.5rem",
@@ -77,7 +80,7 @@ const Details = () => {
                 fontSize: "1.5rem",
               }}
             >
-              Username
+              {currentThread.username}
             </p>
             <p style={{ fontSize: "0.75rem" }}>Online</p>
           </div>

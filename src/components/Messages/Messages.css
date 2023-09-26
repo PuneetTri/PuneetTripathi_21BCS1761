@@ -71,7 +71,7 @@
 
 .message-container-user {
   background-color: #3e66fb;
-  width: 60%;
+  width: 60% !important;
   padding: 1rem;
   align-self: flex-end;
   border-radius: 2rem 2rem 0 2rem;

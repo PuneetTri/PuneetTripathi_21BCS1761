@@ -17,7 +17,7 @@ import NewThread from "./components/NewThread/NewThread";
 import StoryItem from "./components/StoryItem/StoryItem";
 import CallItem from "./components/CallItem/CallItem";
 
-const Contacts = ({ data, calls }) => {
+const Contacts = ({ data, calls, setCurrentThread }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const [scrolled, setScrolled] = useState(false);
   const [searchBarActive, setSearchBarActive] = useState(false);
@@ -73,7 +73,11 @@ const Contacts = ({ data, calls }) => {
       return (
         <div>
           {data.map((thread, index) => (
-            <ThreadItem key={index} data={thread} />
+            <ThreadItem
+              key={index}
+              data={thread}
+              setCurrentThread={setCurrentThread}
+            />
           ))}
           ;
           <div

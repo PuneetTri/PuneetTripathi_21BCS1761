@@ -1,8 +1,17 @@
 import React from "react";
 
-const ThreadItem = ({ data }) => {
+const ThreadItem = ({ data, setCurrentThread }) => {
   return (
-    <div className="threads">
+    <div
+      onClick={() => {
+        setCurrentThread({
+          id: data.id,
+          username: data.username,
+          userProfileImg: data.userProfileImg,
+        });
+      }}
+      className="threads"
+    >
       <div className="profile-img-container">
         <img src={data.userProfileImg} alt="user" />
         <div

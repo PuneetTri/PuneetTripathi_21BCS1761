@@ -4,7 +4,7 @@ import "./Messages.css";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
 
-const Messages = ({ data, setData, intendedRecipient }) => {
+const Messages = ({ data, setData, intendedRecipient, currentThread }) => {
   // Retrieve the user data from localStorage
   const userData = JSON.parse(localStorage.getItem("user"));
 
@@ -53,6 +53,18 @@ const Messages = ({ data, setData, intendedRecipient }) => {
     }
   };
 
+  useEffect(() => {
+    setData([
+      ...data,
+      {
+        message: currentThread.lastMessage,
+        from: "D",
+        time: currentThread.lastMessageTime,
+        type: "sent",
+      },
+    ]);
+  }, []);
+
   return (
     <div id="messages">
       <header>
@@ -62,12 +74,14 @@ const Messages = ({ data, setData, intendedRecipient }) => {
           </button>
           <img
             id="user-profile-img"
-            src="https://via.placeholder.com/50"
+            src={currentThread.userProfileImg}
             alt="user"
             style={{ marginRight: "0.5rem" }}
           />
           <div>
-            <p style={{ fontSize: "0.875rem", fontWeight: "bold" }}>Username</p>
+            <p style={{ fontSize: "0.875rem", fontWeight: "bold" }}>
+              {currentThread.username}
+            </p>
             <p style={{ fontSize: "0.75rem" }}>Online</p>
           </div>
         </div>
@@ -97,7 +111,7 @@ const Messages = ({ data, setData, intendedRecipient }) => {
               >
                 <p>{message.message}</p>
                 <p style={{ fontSize: "0.75rem", marginTop: "0.5rem" }}>
-                  {/* {message.time.toDate().toLocaleTimeString()} */}
+                  {currentThread.lastMessageTime}
                 </p>
               </div>
             ) : (
@@ -108,7 +122,7 @@ const Messages = ({ data, setData, intendedRecipient }) => {
               >
                 <p>{message.message}</p>
                 <p style={{ fontSize: "0.75rem", marginTop: "0.5rem" }}>
-                  {/* {message.time.toDate().toLocaleTimeString()} */}
+                  12:00 PM
                 </p>
               </div>
             )
