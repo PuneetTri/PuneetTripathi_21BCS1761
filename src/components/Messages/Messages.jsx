@@ -84,7 +84,10 @@ const Messages = ({ data, setData, intendedRecipient }) => {
       </header>
 
       <div id="messages-logs-container">
-        <div id="messages-logs">
+        <div
+          id="messages-logs"
+          style={{ maxHeight: "calc(100vh - 150px)", overflowY: "auto" }}
+        >
           {data.map((message, index) =>
             message.from !== userData.uid ? (
               <div
